@@ -37,4 +37,4 @@ That 3rd parameter in the assertions is passed to a stream, so you can easily cu
 
 ## History
 
-Years ago I developed a test framework while leading [Port25](http://www.port25.com). I was recently writing some C++ and wished I had that still, so I whipped this one together. This one is free, so use if you like it :)
+Years ago I co-developed a test framework while leading [Port25](http://www.port25.com). I was recently writing some C++ and wished I had that still, so I whipped this one together. This one is free, so use if you like it :)
