@@ -33,7 +33,7 @@ g++ --std=c++11 ... -o tests mytestclass.cxx JustUnit.cxx
 
 `JustUnit.cxx` provides a `main()` that runs through all test methods of all test classes it can see (I do some C++ trickery to compensate for the lack of reflection).
 
-That 3rd parameter in the assertions is passed to a stream, so you can easily customize the assertion failure message, adding those details about the test you will wish you had once you see a failure. See `JustUnit.hxx` for details.
+That last parameter in the assertions is passed to a stream, so you can easily customize the assertion failure message, adding those details about the test you will wish you had once you see a failure. See `JustUnit.hxx` for details.
 
 It should work with C++11 and later.
 
