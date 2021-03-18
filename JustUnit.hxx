@@ -51,7 +51,7 @@ class TestMethodRegistry {
 };
 
 #define JU_TEST(name)\
-  TestMethodRegistry _ju_r_##name{_ju_m_linkage, #name, name};\
+  JustUnit::TestMethodRegistry _ju_r_##name{_ju_m_linkage, #name, name};\
   static void name()
 
 
