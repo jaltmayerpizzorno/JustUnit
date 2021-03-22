@@ -69,26 +69,36 @@ class TestClass {
   /**
    * Runs all test methods in this test class.
    */
-  void run() {
+  int run() {
+    int count{0};
+
     for (TestMethodRegistry* m = _ju_m_linkage.first; m; m = m->next) {
       try {
-        // XXX startUp
+        ++count;
         m->func();
-        // XXX tearDown
       }
-      catch (std::exception& e) {
+      catch (std::exception& e) { // XXX are we catching too much?
         std::cerr << m->name << " " << e.what() << "\n";
       }
     }
+
+    return count;
   }
 
   /**
    * Runs all test methods in all test classes.
    */
   static void runAll() {
+    int methodCount{0};
+    int classCount{0};
+
     for (TestClass* t = _ju_c_linkage().first; t; t = t->_ju_c_next) {
-      t->run();
+      ++classCount;
+      methodCount += t->run();
     }
+
+    std::cerr << methodCount << " test" << (methodCount == 1 ? "" : "s")
+              << " in " << classCount << " class" << (classCount == 1 ? "" : "es") << "\n";
   }
 
  protected:
