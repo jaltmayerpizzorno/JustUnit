@@ -1,4 +1,4 @@
-# JustUnit:  simple framework for JUnit-like tests in C++
+# JustUnit:  minimalistic framework for JUnit-like tests in C++
  
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE) 
 
@@ -31,11 +31,11 @@ and then compile/link it with `JustUnit`, e.g.:
 g++ --std=c++11 ... -o tests mytestclass.cxx JustUnit.cxx
 ```
 
-`JustUnit.cxx` provides a `main()` that runs through all test methods of all test classes it can see (I do some C++ trickery to compensate for the lack of reflection).
+`JustUnit.cxx` provides a `main()` that runs through all test methods of all test classes it can see (I use constructors creatively to compensate for the lack of reflection).
 
 That last parameter in the assertions is passed to a stream, so you can easily customize the assertion failure message, adding those details about the test you will wish you had once you see a failure. See `JustUnit.hxx` for details.
 
-It should work with C++11 and later.
+This should work with C++11 and later; I didn't test with earlier versions.
 
 ## History
 
