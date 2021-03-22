@@ -31,7 +31,7 @@ and then compile/link it with `JustUnit`, e.g.:
 g++ --std=c++11 ... -o tests mytestclass.cxx JustUnit.cxx
 ```
 
-`JustUnit.cxx` provides a `main()` that runs through all test methods of all test classes it can see (I use constructors creatively to compensate for the lack of reflection).
+`JustUnit.cxx` currently only provides a `main()` that invokes `JustUnit::TestClass::runAll()`, to run all test methods in all test classes. (I use constructors creatively to compensate for the lack of reflection).
 
 That last parameter in the assertions is passed to a stream, so you can easily customize the assertion failure message, adding those details about the test you will wish you had once you see a failure. See `JustUnit.hxx` for details.
 
