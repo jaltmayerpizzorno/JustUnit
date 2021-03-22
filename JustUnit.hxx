@@ -24,7 +24,7 @@ class Linkage {
 
    void link(C* c, C* C::*next) {
     if (last != 0) {
-      last->*next = c; // ooh, fancy c++
+      last->*next = c; // ooh, fancy c++ :)
     }
     if (first == 0) {
       first = c;
@@ -60,19 +60,48 @@ class TestMethodRegistry {
  */
 class TestClass {
  public:
-  TestClass();
+  TestClass() {
+    _ju_c_linkage().link(this, &TestClass::_ju_c_next);
+  }
 
   virtual ~TestClass() {}
 
-  void run();
+  /**
+   * Runs all test methods in this test class.
+   */
+  void run() {
+    for (TestMethodRegistry* m = _ju_m_linkage.first; m; m = m->next) {
+      try {
+        // XXX startUp
+        m->func();
+        // XXX tearDown
+      }
+      catch (std::exception& e) {
+        std::cerr << m->name << " " << e.what() << "\n";
+      }
+    }
+  }
 
-  static void runAll();
+  /**
+   * Runs all test methods in all test classes.
+   */
+  static void runAll() {
+    for (TestClass* t = _ju_c_linkage().first; t; t = t->_ju_c_next) {
+      t->run();
+    }
+  }
 
  protected:
   Linkage<TestMethodRegistry> _ju_m_linkage;
 
  private:
-  static Linkage<TestClass>& _ju_c_linkage();
+  static Linkage<TestClass>& _ju_c_linkage() {
+    // this is safer than a static member, as it is initialized on demand on 1st usage,
+    // whereas a static member's constructor may only run after a TestClass' constructor
+    static Linkage<TestClass> linkage;
+    return linkage;
+  }
+
   TestClass* _ju_c_next;
 };
 
