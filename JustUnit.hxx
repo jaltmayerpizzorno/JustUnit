@@ -119,18 +119,21 @@ class TestClass {
 /**
  * Base for assertion failures.
  */
-class AssertionFailure : public std::runtime_error {
-  using super = std::runtime_error;
+class AssertionFailure : public std::logic_error {
+  using super = std::logic_error;
  public:
    AssertionFailure(const std::string& s) : super(s) {}
 };
 
 #define ju_assert(pred, msg)\
   if (!(pred)) {\
-    stringstream ss;\
+    std::stringstream ss;\
     ss << __FILE__ << ":" <<  __LINE__ << ": " << msg;\
     throw JustUnit::AssertionFailure(ss.str());\
   }
+
+#define ju_fail(msg)\
+  ju_assert(false, msg)
 
 #define ju_assert_eq(check, value, msg)\
   ju_assert(check == value, #check << " != " << #value << " " << msg)
