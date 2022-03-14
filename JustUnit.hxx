@@ -66,6 +66,9 @@ class TestClass {
 
   virtual ~TestClass() {}
 
+  virtual void startUp() {}
+  virtual void tearDown() {}
+
   /**
    * Runs all test methods in this test class.
    */
@@ -75,10 +78,13 @@ class TestClass {
     for (TestMethodRegistry* m = _ju_m_linkage.first; m; m = m->next) {
       try {
         ++count;
+        startUp();
         m->func();
+        tearDown();
       }
       catch (std::exception& e) { // XXX are we catching too much?
         std::cerr << m->name << " " << e.what() << "\n";
+        tearDown();
       }
     }
 
