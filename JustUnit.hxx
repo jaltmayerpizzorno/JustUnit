@@ -79,6 +79,7 @@ class TestClass {
       try {
         ++count;
         startUp();
+        std::cerr << "\r" << m->name << "...    ";
         m->func();
         tearDown();
       }
@@ -104,7 +105,7 @@ class TestClass {
     }
 
     std::cerr << methodCount << " test" << (methodCount == 1 ? "" : "s")
-              << " in " << classCount << " class" << (classCount == 1 ? "" : "es") << "\n";
+              << " in " << classCount << " class" << (classCount == 1 ? "" : "es") << ".\n";
   }
 
  protected:
