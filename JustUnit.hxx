@@ -84,7 +84,7 @@ class TestClass {
         tearDown();
       }
       catch (std::exception& e) { // XXX are we catching too much?
-        std::cerr << m->name << " FAILED: " << e.what() << "\n";
+        std::cerr << "\r" << m->name << " FAILED: " << e.what() << "\n";
         tearDown();
       }
     }
